@@ -1,22 +1,25 @@
 <template>
- 
-  <h1>${heading}</h1>
-  
-  <form submit.trigger="addTodo()">
-    <input type="text" value.bind="todoDescription">
-    <button type="submit" disabled.bind="!todoDescription">Add Todo</button>
-  </form>
+  <require from="./styles.css"></require>
+  <require from="./contact-list"></require>
 
-  <ul>
-    <li repeat.for="todo of todos">
-      <input type="checkbox" checked.bind="todo.done">
-      <span css="text-decoration: ${todo.done ? 'line-through' : 'line-through'};color:${todo.done ? 'red' : 'blue'}">
-        ${todo.description}
-      </span>
-      <button click.trigger="removeTodo(todo)">Remove</button>
-    </li>
-  </ul>
+  <nav class="navbar navbar-light bg-light border-bottom fixed-top" role="navigation">
+    <a class="navbar-brand" href="#">
+      <i class="fa fa-user"></i>
+      <span>Contacts</span>
+    </a>
+  </nav>
 
+  <loading-indicator loading.bind="router.isNavigating || api.isRequesting"></loading-indicator>
 
-
+  <div class="container-md">
+    <div class="row">
+      <contact-list class="col-sm-5 col-md-4"></contact-list>
+      <router-view class="col-sm-7 col-md-8"></router-view>
+    </div>
+  </div>
 </template>
+
+
+
+
+

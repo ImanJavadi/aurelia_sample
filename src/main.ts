@@ -3,10 +3,12 @@ import 'font-awesome/css/font-awesome.css';
 import {Aurelia} from 'aurelia-framework';
 import * as environment from '../config/environment.json';
 import {PLATFORM} from 'aurelia-pal';
+import 'whatwg-fetch';
 
 export function configure(aurelia: Aurelia): void {
   aurelia.use
     .standardConfiguration()
+    .developmentLogging()
     .feature(PLATFORM.moduleName('resources/index'));
 
   aurelia.use.developmentLogging(environment.debug ? 'debug' : 'warn');

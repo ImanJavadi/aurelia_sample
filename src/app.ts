@@ -5,7 +5,7 @@ import {WebAPI} from './web-api';
 @inject(WebAPI)
 export class App {
   router: Router;
-
+  
   constructor(public api: WebAPI) {}
 
   configureRouter(config: RouterConfiguration, router: Router) {

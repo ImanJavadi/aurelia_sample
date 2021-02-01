@@ -7,7 +7,8 @@ const resBundle = require('i18next-resource-store-loader!./locales/index');
 export function configure(aurelia: Aurelia): void {
   aurelia.use
     .standardConfiguration()
-    .feature(PLATFORM.moduleName('resources/index'));
+    .feature(PLATFORM.moduleName('resources/index'))
+    .plugin(PLATFORM.moduleName('aurelia-validation'));
     aurelia.use.developmentLogging(environment.debug ? 'debug' : 'warn');
 
     if (environment.testing) {

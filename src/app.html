@@ -1,5 +1,28 @@
 <template>
   <h1 t="title"></h1>
   <h1 t="other-translations:title"></h1>
+  <div validation-errors.bind="errors">
+  <form submit.trigger="test_validate()" >
+    <input type="text" value.bind="title1 & validate ">
+  
+ 
+  <button type="submit" class="btn btn-primary" type="submit" disabled.bind="controller.errors.length>=1" >lklk</button>
+  </form>
+
+  
+    <input type="text" placeholder="Title" value.bind="title & validate" required>
+
+    <ul if.bind="controller.errors">
+        <li repeat.for="error of controller.errors">
+            ${error.message}
+        </li>
+    </ul>
+    
+</div>
+
+
+
+  
+
 </template>
 

@@ -10,7 +10,7 @@ export function configure(aurelia: Aurelia): void {
     .feature(PLATFORM.moduleName('resources/index'))
     .plugin(PLATFORM.moduleName('aurelia-validation'));
     aurelia.use.developmentLogging(environment.debug ? 'debug' : 'warn');
-
+    aurelia.use.plugin(PLATFORM.moduleName('aurelia-dialog'));
     if (environment.testing) {
       aurelia.use.plugin(PLATFORM.moduleName('aurelia-testing'));
     }

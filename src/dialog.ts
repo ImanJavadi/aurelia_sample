@@ -20,11 +20,11 @@ export class Dialog {
      }
  
      ok() : void {
-         this.action();
+         //this.action();
         this.dialogController.ok();
      }
      cancel():void{
-        this.action_cancel();
+       // this.action_cancel();
         this.dialogController.cancel();
      }
 

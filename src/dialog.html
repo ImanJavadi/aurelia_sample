@@ -5,7 +5,8 @@
             padding: 15px;
         }
     </style>
- 
+    <ai-dialog>
+        <ai-dialog-body>
     <div class="div">
         <div>
             <h1>${title}</h1>
@@ -14,10 +15,12 @@
         <div>
             <p1>${message}...</p1>
         </div>
-     
-        <div>
+    </div>
+    </ai-dialog-body>
+        <ai-dialog-footer>
             <button click.delegate="ok()">OK</button>
             <button click.delegate="cancel()">Cancel</button>
-        </div>
-    </div>
+        </ai-dialog-footer>    
+    
+    </ai-dialog>
 </template>

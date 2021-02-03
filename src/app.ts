@@ -1,3 +1,4 @@
+import { Applicant } from './Applicant';
 
 import { inject } from 'aurelia-dependency-injection';
 import { I18N } from "aurelia-i18n";
@@ -6,13 +7,13 @@ import { DialogService } from "aurelia-dialog";
 import { Dialog } from "dialog";
 
 interface Applicant1 {
-  Name?:string;
-  Familyname?:string;
-  Address?:string;
-  CountryOfOrigin?:string;
-  EMailAdress?:string;
-  Age?:number;
-  Hired?:string;
+  Name:string;
+  Familyname:string;
+  Address:string;
+  CountryOfOrigin:string;
+  EMailAdress:string;
+  Age:number;
+  Hired:string;
 }
 @inject(I18N,ValidationControllerFactory,DialogService)
 export class App {
@@ -26,6 +27,7 @@ export class App {
     Age:'',
     Hired:''
   }
+  
   controller: any;
     constructor(private i18n:I18N, controllerFactory: ValidationControllerFactory,private dialogService : DialogService){
       this.controller = controllerFactory.createForCurrentScope();
@@ -74,19 +76,41 @@ export class App {
   }
   openDialog() : void {
     this.dialogService.open( {viewModel: Dialog,
-        model: {message : 'Message text...', title: 'Title text...', action: this.action, action_cancel:this.action_cancel} }).then(response => {
+        model: {message : 'You Really sure to reset all the data?', title: 'Reset Data', action: this.action, action_cancel:this.action_cancel} }).whenClosed(response => {
       console.log(response);
+      if (!response.wasCancelled) {
+       this.controller.reset();
+       this.emptyapplicant();
+      } 
    });
   }
  
   action() : void {
-    alert('OK button pressed');
+    
+    console.log('test');
   }
   action_cancel():void{
-    alert('cancel button message');
+   
   }
   chenge_locale(lan:string):void{
      this.i18n.setLocale(lan);
    }
-  public message = 'Hello World!';
+  countrycheck()
+  {
+    //alert('test');
+  }
+  get canSave() {
+    return this.Applicant.Name  || this.Applicant.Address || this.Applicant.Age || this.Applicant.CountryOfOrigin || this.Applicant.EMailAdress;
+  }
+  emptyapplicant()
+  {
+    this.Applicant.Name='';
+    this.Applicant.Familyname='';
+    this.Applicant.Address='';
+    this.Applicant.CountryOfOrigin='';
+    this.Applicant.EMailAdress='';
+    this.Applicant.Age='';
+    this.Applicant.Hired='';
+  }
+ public messege:string='asdsads';
 }

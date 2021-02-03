@@ -3,6 +3,8 @@ import * as environment from '../config/environment.json';
 import {PLATFORM} from 'aurelia-pal';
 import { Backend, TCustomAttribute } from "aurelia-i18n";
 const resBundle = require('i18next-resource-store-loader!./locales/index');
+import 'bootstrap';
+import 'font-awesome/css/font-awesome.css';
 
 export function configure(aurelia: Aurelia): void {
   aurelia.use
@@ -29,12 +31,11 @@ export function configure(aurelia: Aurelia): void {
         resources: resBundle,
         attributes: aliases,
         lng : 'en',
-        fallbackLng : 'no',
+        fallbackLng : 'de',
         debug : true,
         defaultNS: 'translation',
         ns: [
           'translation',
-          'other-translations'
         ]
       });
     });

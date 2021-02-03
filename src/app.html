@@ -1,27 +1,96 @@
 <template>
-  <h1 t="title"></h1>
-  <h1 t="other-translations:title"></h1>
-  <div validation-errors.bind="errors">
-  <form submit.trigger="test_validate()" >
-    <input type="text" value.bind="title1 & validate ">
-  
- 
-  <button type="submit" class="btn btn-primary" type="submit" disabled.bind="controller.errors.length>=1" >lklk</button>
-  </form>
+  <require from="bootstrap/dist/css/bootstrap.min.css"></require>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Hahn</a>
+    <!-- Links -->
+    <ul class="navbar-nav">
+      <!-- Dropdown -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          language
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#" click.delegate="chenge_locale('en')">Englich</a>
+          <a class="dropdown-item" href="#" click.delegate="chenge_locale('de')">Deutsch</a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+  <br>
+    
+<div class="container">
+  <h2>Form Validation</h2>
+  <p>In this example, we use <code>.was-validated</code> to indicate what's missing before submitting the form:</p>
+  <form  validation-errors.bind="errors">
+    <div class="form-group">
+      <label for="uname" t="Name"></label>
+      <input type="text" class="form-control"  value.bind="Applicant.Name & validate"  t="[placeholder]$t(Enter) $t(Name)" >
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group">
+      <label for="ufamily" t="FamilyName"></label>
+      <input type="text" class="form-control"  value.bind="Applicant.FamilyName & validate" t="[placeholder]$t(Enter) $t(FamilyName)" >
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group">
+      <label for="Address" t="Address"></label>
+      <input type="text" class="form-control" id="uname" value.bind="Applicant.Address & validate" t="[placeholder]$t(Enter) $t(Address)" name="uname" required>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group">
+      <label for="CountryOfOrigin" t="CountryOfOrigin"></label>
+      <input type="text" class="form-control" id="uname" value.bind="Applicant.CountryOfOrigin & validate" t="[placeholder]$t(Enter) $t(CountryOfOrigin)" name="uname" required>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group">
+      <label for="EMailAdress" t="EMailAdress"></label>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" value.bind="Applicant.EMailAdress & validate" t="[placeholder]$t(Enter) $t(EMailAdress)" id="demo" name="email">
+        <div class="input-group-append">
+          <span class="input-group-text">@example.com</span>
+        </div>
+      </div>
+      <div class="valid-feedback" >Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group">
+      <label for="Age" t="Age"></label>
+      <input type="text" class="form-control" id="uname" value.bind="Applicant.Age & validate" t="[placeholder]$t(Enter) $t(Age)" name="Age" required>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
 
-  
-    <input type="text" placeholder="Title" value.bind="title & validate" required>
+    <div class="form-group">
+      <label for="Age" t="Hired"></label>
+        <div class="form-check-inline" >
+          <label class="form-check-label" for="radio1" >
+            <input type="radio" class="form-check-input" checked.bind="Applicant.Hired & validate"  id="radio1" name="Hired" value="option1" ><span t="Yes"></span>
+          </label>
+        </div>
+        <div class="form-check-inline" >
+          <label class="form-check-label" for="radio2" >
+            <input type="radio" class="form-check-input" checked.bind="Applicant.Hired & validate"  id="radio2" name="Hired" value="option2"><span t="No"></span>
+          </label>
+        </div>
+    </div>
+    <button type="button" class="btn btn-success" t="Send" disabled.bind="controller.errors.length>=1">Send</button>
+    <button type="button" class="btn btn-info" t="Reset" click.delegate="openDialog()">Reset</button>
+
 
     <ul if.bind="controller.errors">
-        <li repeat.for="error of controller.errors">
-            ${error.message}
-        </li>
-    </ul>
-    
+      <li repeat.for="error of controller.errors">
+          ${error.message}
+      </li>
+  </ul>
+  
+  </form>
 </div>
 
-
-<button click.delegate="openDialog()" >Open</button>
   
 
 </template>

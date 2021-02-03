@@ -1,3 +1,15 @@
 {
-  "title": "iman!"
+  "title": "iman!",
+  "Name" :"Name",
+  "FamilyName":"FamilyName",
+  "Address":"Address",
+  "CountryOfOrigin":"CountryOfOrigin",
+  "EMailAdress":"EMailAdress",
+  "Age":"Age",
+  "Hired":"Hired",
+  "Send":"Send",
+  "Reset":"Reset",
+  "Yes":"Yes",
+  "No":"No",
+  "Enter":"Enter"
 }

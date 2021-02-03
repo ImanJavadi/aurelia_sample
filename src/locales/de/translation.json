@@ -1,0 +1,15 @@
+{
+  "title": "iman!",
+  "Name" :"Name",
+  "FamilyName":"Nachname",
+  "Address":"Adresse",
+  "CountryOfOrigin":"Ursprungsland",
+  "EMailAdress":"E-Mail-Addresse",
+  "Age":"Alter",
+  "Hired":"Gemietet",
+  "Send":"Senden",
+  "Reset":"Zurücksetzen",
+  "Yes":"Ja",
+  "No":"Nein",
+  "Enter":"Eingeben"
+}

@@ -87,9 +87,9 @@
           ${errorInfo.error.message}
         </span>
     </div>
-    <button type="button" class="btn btn-success" t="Send" disabled.bind="controller.errors.length>=1">Send</button>
+    <button type="button" class="btn btn-success" t="Send" click.trigger="send()" disabled.bind="controller.errors.length>=1">Send</button>
     <button type="button" class="btn btn-info" t="Reset" click.trigger="openDialog()" disabled.bind="!canSave">Reset</button>
-
+    
 
     <ul if.bind="controller.errors">
       <li repeat.for="error of controller.errors">
@@ -100,7 +100,7 @@
   </form>
 </div>
 
-  ${messege}
+<router-view></router-view>
 
 </template>
 

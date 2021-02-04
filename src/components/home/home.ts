@@ -95,9 +95,6 @@ export class App {
   action_cancel():void{
    
   }
-  chenge_locale(lan:string):void{
-     this.i18n.setLocale(lan);
-   }
   countrycheck()
   {
     //alert('test');

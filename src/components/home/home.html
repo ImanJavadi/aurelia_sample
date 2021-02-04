@@ -1,24 +1,4 @@
 <template>
-  <require from="bootstrap/dist/css/bootstrap.min.css"></require>
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <!-- Brand -->
-    <a class="navbar-brand" href="#">Hahn</a>
-    <!-- Links -->
-    <ul class="navbar-nav">
-      <!-- Dropdown -->
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          language
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#" click.delegate="chenge_locale('en')">Englich</a>
-          <a class="dropdown-item" href="#" click.delegate="chenge_locale('de')">Deutsch</a>
-        </div>
-      </li>
-    </ul>
-  </nav>
-  <br>
-    
 <div class="container" >
   <h2>Form Validation</h2>
   <p>In this example, we use <code>.was-validated</code> to indicate what's missing before submitting the form:</p>
@@ -87,9 +67,9 @@
           ${errorInfo.error.message}
         </span>
     </div>
-    <button type="button" class="btn btn-success" t="Send" click.trigger="send()" disabled.bind="canSend || controller.errors.length>=1">Send</button>
+    <button type="button" class="btn btn-success" t="Send" click.trigger="send()" disabled.bind="!canSend || controller.errors.length>=1">Send</button>
     <button type="button" class="btn btn-info" t="Reset" click.trigger="openDialog('You Really sure to reset all the data?','Reset Data',true,'reset')" disabled.bind="!canSave">Reset</button>
-     <button type="button" class="btn btn-success" click.trigger="test()">sdfsdf<button>
+   
 
     <ul if.bind="controller.errors">
       <li repeat.for="error of controller.errors">

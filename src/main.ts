@@ -5,6 +5,7 @@ import { Backend, TCustomAttribute } from "aurelia-i18n";
 const resBundle = require('i18next-resource-store-loader!./locales/index');
 import 'bootstrap';
 import 'font-awesome/css/font-awesome.css';
+import 'whatwg-fetch';
 
 export function configure(aurelia: Aurelia): void {
   aurelia.use

@@ -6,6 +6,7 @@ import { ValidationControllerFactory, ValidationRules, Validator,validateTrigger
 import { DialogService } from "aurelia-dialog";
 import { Dialog } from "dialog";
 import {RouterConfiguration, Router} from 'aurelia-router';
+import {HttpClient} from 'aurelia-fetch-client';
 interface Applicant1 {
   Name:string;
   Familyname:string;
@@ -27,6 +28,7 @@ export class App {
     Age:'',
     Hired:''
   }
+  test:any;
   router: Router;
   controller: any;
     constructor(private i18n:I18N, controllerFactory: ValidationControllerFactory,private dialogService : DialogService){
@@ -74,14 +76,17 @@ export class App {
   }
   attached(): void {
   }
-  openDialog() : void {
+  openDialog(message:string,title:string,cancelebtn:boolean,dialogtype:string) : void {
     this.dialogService.open( {viewModel: Dialog,
-        model: {message : 'You Really sure to reset all the data?', title: 'Reset Data', action: this.action, action_cancel:this.action_cancel} }).whenClosed(response => {
+        model: {message : message, title:title, action: this.action, action_cancel:this.action_cancel,cancelebtn:cancelebtn} }).whenClosed(response => {
       console.log(response);
-      if (!response.wasCancelled) {
-       this.controller.reset();
-       this.emptyapplicant();
-      } 
+      if(dialogtype=='reset')
+      {
+         if (!response.wasCancelled) {
+           this.controller.reset();
+           this.emptyapplicant();
+         } 
+      }
    });
   }
   //router
@@ -117,6 +122,10 @@ export class App {
   get canSave() {
     return this.Applicant.Name  || this.Applicant.Address || this.Applicant.Age || this.Applicant.CountryOfOrigin || this.Applicant.EMailAdress;
   }
+  get canSend()
+  {
+    return this.Applicant.Name  && this.Applicant.Address && this.Applicant.Age && this.Applicant.CountryOfOrigin && this.Applicant.EMailAdress;
+  }
   emptyapplicant()
   {
     this.Applicant.Name='';
@@ -129,7 +138,42 @@ export class App {
   }
   send()
   {
-    this.router.navigate('success');
+    let httpClient = new HttpClient();
+
+    httpClient.configure(config => {
+      config
+        .withBaseUrl('https://jsonplaceholder.typicodes.com/')
+        .withDefaults({
+          credentials: 'same-origin',
+          headers: {
+            'Accept': 'application/json',
+            'X-Requested-With': 'Fetch'
+          }
+        })
+        .withInterceptor({
+          request(request) {
+            console.log(`Requesting ${request.method} ${request.url}`);
+            let status1=request.method;
+            return request;
+          },
+          response(response) {
+            console.log(`Received ${response.status} ${response.url}`); 
+            
+            return response;
+          }
+        });
+    });
+
+    httpClient.fetch('users')
+    .then(response => response.json())
+    .then(data=> {
+      this.test=data;
+      this.router.navigate('success');
+    })
+    .catch((error) => {
+      this.openDialog('the sending was not successful','Error',false,'error');
+    });
+    
   }
  public messege:string='asdsads';
 }

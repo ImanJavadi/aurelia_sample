@@ -1,3 +1,105 @@
 <template>
-    salammmmmm
-    </template>
+  <require from="bootstrap/dist/css/bootstrap.min.css"></require>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Hahn</a>
+    <!-- Links -->
+    <ul class="navbar-nav">
+      <!-- Dropdown -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          language
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#" click.delegate="chenge_locale('en')">Englich</a>
+          <a class="dropdown-item" href="#" click.delegate="chenge_locale('de')">Deutsch</a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+  <br>
+    
+<div class="container" >
+  <h2>Form Validation</h2>
+  <p>In this example, we use <code>.was-validated</code> to indicate what's missing before submitting the form:</p>
+  <form  validation-errors.bind="errors">
+    <div class="form-group" validation-errors.bind="errorname">
+      <label for="uname" t="Name" ></label>
+      <input type="text" class="form-control" class.bind="errorname.length ? 'border border-danger' : ''"  value.bind="Applicant.Name & validate"  t="[placeholder]$t(Enter) $t(Name)" change.delegate="countrycheck()" >
+      <span class="help-block" repeat.for="errorInfo of errorname">
+        ${errorInfo.error.message}
+      </span>
+    </div>
+    <div class="form-group" validation-errors.bind="errorfamilyname">
+      <label for="ufamily" t="FamilyName"></label>
+      <input type="text" class="form-control" class.bind="errorfamilyname.length ? 'border border-danger' : ''"  value.bind="Applicant.FamilyName & validate" t="[placeholder]$t(Enter) $t(FamilyName)" >
+      <span class="help-block" repeat.for="errorInfo of errorfamilyname">
+        ${errorInfo.error.message}
+      </span>
+    </div>
+    <div class="form-group" validation-errors.bind="erroraddress">
+      <label for="Address" t="Address"></label>
+      <input type="text" class="form-control" id="uname" class.bind="erroraddress.length ? 'border border-danger' : ''" value.bind="Applicant.Address & validate" t="[placeholder]$t(Enter) $t(Address)" name="uname" >
+      <span class="help-block" repeat.for="errorInfo of erroraddress">
+        ${errorInfo.error.message}
+      </span>
+    </div>
+    <div class="form-group" validation-errors.bind="errorcountry">
+      <label for="CountryOfOrigin" t="CountryOfOrigin"></label>
+      <input type="text" class="form-control" id="uname" class.bind="errorcountry.length ? 'border border-danger' : ''" value.bind="Applicant.CountryOfOrigin & validate" t="[placeholder]$t(Enter) $t(CountryOfOrigin)" name="uname" >
+      <span class="help-block" repeat.for="errorInfo of errorcountry">
+        ${errorInfo.error.message}
+      </span>
+    </div>
+    <div class="form-group" validation-errors.bind="erroremail">
+      <label for="EMailAdress" t="EMailAdress"></label>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" class.bind="erroremail.length ? 'border border-danger' : ''" value.bind="Applicant.EMailAdress & validate" t="[placeholder]$t(Enter) $t(EMailAdress)" id="demo" name="email">
+        <div class="input-group-append">
+          <span class="input-group-text">@example.com</span>
+        </div>
+      </div>
+      <span class="help-block" repeat.for="errorInfo of erroremail">
+        ${errorInfo.error.message}
+      </span>
+    </div>
+    <div class="form-group" validation-errors.bind="errorage">
+      <label for="Age" t="Age"></label>
+      <input type="text" class="form-control" class.bind="errorage.length ? 'border border-danger' : ''" id="uname" value.bind="Applicant.Age & validate" t="[placeholder]$t(Enter) $t(Age)" name="Age" >
+      <span class="help-block" repeat.for="errorInfo of errorage">
+        ${errorInfo.error.message}
+      </span>
+    </div>
+
+    <div class="form-group" validation-errors.bind="errorhired" >
+      <label for="Age" t="Hired"></label>
+        <div class="form-check-inline" >
+          <label class="form-check-label" for="radio1" >
+            <input type="radio" class="form-check-input"  checked.bind="Applicant.Hired & validate"  id="radio1" name="Hired" value="option1" ><span t="Yes"></span>
+          </label>
+        </div>
+        <div class="form-check-inline" >
+          <label class="form-check-label" for="radio2" >
+            <input type="radio" class="form-check-input" checked.bind="Applicant.Hired & validate"  id="radio2" name="Hired" value="option2"><span t="No"></span>
+          </label>
+        </div>
+        <span class="help-block" repeat.for="errorInfo of errorhired">
+          ${errorInfo.error.message}
+        </span>
+    </div>
+    <button type="button" class="btn btn-success" t="Send" click.trigger="send()" disabled.bind="canSend || controller.errors.length>=1">Send</button>
+    <button type="button" class="btn btn-info" t="Reset" click.trigger="openDialog('You Really sure to reset all the data?','Reset Data',true,'reset')" disabled.bind="!canSave">Reset</button>
+     <button type="button" class="btn btn-success" click.trigger="test()">sdfsdf<button>
+
+    <ul if.bind="controller.errors">
+      <li repeat.for="error of controller.errors">
+          ${error.message}
+      </li>
+  </ul>
+  
+  </form>
+</div>
+
+
+</template>
+

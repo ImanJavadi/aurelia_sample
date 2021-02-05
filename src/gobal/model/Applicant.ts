@@ -9,7 +9,7 @@ export class Applicant{
     CountryOfOrigin:string;
     EMailAdress:string;
     Age:string;
-    Hired:string;
+    Hired:boolean;
     controller: any;
     constructor( controllerFactory: ValidationControllerFactory){
       this.controller = controllerFactory.createForCurrentScope();

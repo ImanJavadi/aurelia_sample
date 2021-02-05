@@ -75,7 +75,7 @@ export class App {
   }
   send()
   {
-    let body1={
+    let body={
       id: 0,
       name: this.Applicant.Name,
       familyName: this.Applicant.Familyname,
@@ -85,27 +85,12 @@ export class App {
       age: this.Applicant.Age,
       hired: this.Applicant.Hired
     }
-    let body={
-      id: 0,
-      name: 'imannn',
-      familyName: 'javadijavadi',
-      address: 'asdadsasd asd as a sd as',
-      countryOfOrigin: 'usa',
-      emailAddress: 'imanjavadiop@gmail.com',
-      age: 45,
-      hired: true
-    }
+
    
   this.api.post('CreateUser',body)
-  .then(Response=>{
-    if(Response.status==201){
-    
-      this.router.navigateToRoute('success');
-    }
-    else{
-      this.openDialog('the sending was not successful11','Error',false,'error');
-    }
-
+  .then(Response=> Response.json())
+  .then(data=>{
+    alert('')
   })
   .catch((error)=>{
     alert(error)

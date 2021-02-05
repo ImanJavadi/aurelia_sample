@@ -61,12 +61,12 @@ export class App {
         this.countrystatus=false;
       })
   }
-  get canSave() {
-    return this.Applicant.Name  || this.Applicant.Address || this.Applicant.Age || this.Applicant.CountryOfOrigin || this.Applicant.EMailAdress;
+  get canReset() {
+    return this.Applicant.Name  || this.Applicant.Address || this.Applicant.Age || this.Applicant.CountryOfOrigin || this.Applicant.EMailAdress || this.Applicant.Hired;
   }
   get canSend()
   {
-    return this.Applicant.Name  && this.Applicant.Address && this.Applicant.Age && this.Applicant.CountryOfOrigin && this.Applicant.EMailAdress && this.countrystatus;
+    return this.Applicant.Name  && this.Applicant.Address && this.Applicant.Age && this.Applicant.CountryOfOrigin && this.Applicant.EMailAdress && this.countrystatus &&  this.Applicant.Hired;
   }
   emptyapplicant()
   {
@@ -75,7 +75,17 @@ export class App {
   }
   send()
   {
-  this.api.post('MAINCONROLLER/CreateUser',qs.JSON(this.Applicant))
+    let body={
+      id: 0,
+      name: this.Applicant.Name,
+      familyName: this.Applicant.Familyname,
+      address: this.Applicant.Address,
+      countryOfOrigin: this.Applicant.CountryOfOrigin,
+      emailAddress: this.Applicant.EMailAdress,
+      age: this.Applicant.Age,
+      hired: this.Applicant.Hired
+    }
+  this.api.post('MAINCONROLLER/CreateUser',body)
   .then(Response=>{
     if(Response.status==201){
     
@@ -92,7 +102,17 @@ export class App {
   }
   test()
   {
-    alert(qs.JSON(this.Applicant));
+    let body={
+      id: 0,
+      name: this.Applicant.Name,
+      familyName: this.Applicant.Familyname,
+      address: this.Applicant.Address,
+      countryOfOrigin: this.Applicant.CountryOfOrigin,
+      emailAddress: this.Applicant.EMailAdress,
+      age: this.Applicant.Age,
+      hired: this.Applicant.Hired
+    }
+    
   }
  
 }

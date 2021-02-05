@@ -9,6 +9,7 @@ export class Dialog {
     action?: (args?: any) => {};
     action_cancel?: (args?:any)=>{};
     cancelebtn:boolean;
+
     constructor(private dialogController : DialogController) {
         dialogController.settings.centerHorizontalOnly = true;
     }
@@ -26,8 +27,8 @@ export class Dialog {
         this.dialogController.ok();
      }
      cancel():void{
-       // this.action_cancel();
-        this.dialogController.cancel();
+        //this.action_cancel();
+       this.dialogController.cancel();
      }
 
 }

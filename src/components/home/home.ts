@@ -6,73 +6,20 @@ import { DialogService } from "aurelia-dialog";
 import { Dialog } from "components/dialog/dialog";
 import {RouterConfiguration, Router} from 'aurelia-router';
 import {HttpClient} from 'aurelia-fetch-client';
-interface Applicant1 {
-  Name:string;
-  Familyname:string;
-  Address:string;
-  CountryOfOrigin:string;
-  EMailAdress:string;
-  Age:number;
-  Hired:string;
-}
-@inject(I18N,ValidationControllerFactory,DialogService,Router)
-export class App {
-  //name:string;
-  Applicant={
-    Name:'',
-    Familyname:'',
-    Address:'',
-    CountryOfOrigin:'',
-    EMailAdress:'',
-    Age:'',
-    Hired:''
-  }
-  controller: any;
-    constructor(private i18n:I18N, controllerFactory: ValidationControllerFactory,private dialogService : DialogService,private router:Router){
-      this.controller = controllerFactory.createForCurrentScope();
-      this.controller.validateTrigger = validateTrigger.changeOrBlur;
-      ValidationRules
-            .ensure('title')
-            .required()
-            .withMessage('test')
-            .on(this)
-            .ensure('title1')
-            .required()
-            .withMessage('13123123')
-            .on(this)
-            .ensure('Name')
-            .required()
-            .minLength(5)
-            .withMessage('tetst1 name')
-            .ensure('Familyname')
-            .required()
-            .minLength(5)
-            .withMessage('tetst2 ')
-            .ensure('Address')
-            .required()
-            .minLength(10)
-            .withMessage('tetst3')
-            .ensure('CountryOfOrigin')
-            .required()
-            .minLength(10)
-            .withMessage('tetst4')
-            .ensure('EMailAdress')
-            .required()
-            .email()
-            .withMessage('tetst5')
-            .ensure('Age')
-            .required()
-            .range(20,60)
-            .withMessage('tetst6')
-            .ensure('Hired')
-            .required()
-            .withMessage('tetst6')
-            .on(this.Applicant);
+import { Applicant } from "gobal/model/Applicant";
+import { apiservice } from "gobal/services/api-service";
+import * as qs from 'querystringify';
 
+@inject(I18N,DialogService,Router,Applicant,apiservice,ValidationControllerFactory)
+export class App {
+
+  controller: any;
+  statusheird = ['Yes', 'No'];
+  countrystatus:boolean=true;
+  constructor(private i18n:I18N,private dialogService : DialogService,private router:Router,private Applicant:Applicant,private api:apiservice,controllerFactory: ValidationControllerFactory){
+    this.controller = controllerFactory.createForCurrentScope();
       this.i18n.setLocale('en');
-      this.router=router;
-  }
-  attached(): void {
+      this.router=router;  
   }
   openDialog(message:string,title:string,cancelebtn:boolean,dialogtype:string) : void {
     this.dialogService.open( {viewModel: Dialog,
@@ -81,13 +28,13 @@ export class App {
       if(dialogtype=='reset')
       {
          if (!response.wasCancelled) {
+         
            this.controller.reset();
            this.emptyapplicant();
          } 
       }
    });
   }
-
   action() : void {
     
     console.log('test');
@@ -97,62 +44,55 @@ export class App {
   }
   countrycheck()
   {
-    //alert('test');
+    this.api.getcountery(this.Applicant.CountryOfOrigin)
+    .then(Response=>{
+      if(Response.status==200)
+      {
+        this.countrystatus=true;
+      }
+      else if(Response.status==404)
+      {
+        this.countrystatus=false;
+      }
+
+    })
+    .catch(erroe=>
+      {
+        this.countrystatus=false;
+      })
   }
   get canSave() {
     return this.Applicant.Name  || this.Applicant.Address || this.Applicant.Age || this.Applicant.CountryOfOrigin || this.Applicant.EMailAdress;
   }
   get canSend()
   {
-    return this.Applicant.Name  && this.Applicant.Address && this.Applicant.Age && this.Applicant.CountryOfOrigin && this.Applicant.EMailAdress;
+    return this.Applicant.Name  && this.Applicant.Address && this.Applicant.Age && this.Applicant.CountryOfOrigin && this.Applicant.EMailAdress && this.countrystatus;
   }
   emptyapplicant()
   {
-    this.Applicant.Name='';
-    this.Applicant.Familyname='';
-    this.Applicant.Address='';
-    this.Applicant.CountryOfOrigin='';
-    this.Applicant.EMailAdress='';
-    this.Applicant.Age='';
-    this.Applicant.Hired='';
+    //this.controller.reset();
+    this.Applicant=null;
   }
   send()
   {
-    let httpClient = new HttpClient();
-
-    httpClient.configure(config => {
-      config
-        .withBaseUrl('https://jsonplaceholder.typicodes.com/')
-        .withDefaults({
-          credentials: 'same-origin',
-          headers: {
-            'Accept': 'application/json',
-            'X-Requested-With': 'Fetch'
-          }
-        })
-        .withInterceptor({
-          request(request) {
-            console.log(`Requesting ${request.method} ${request.url}`);
-            let status1=request.method;
-            return request;
-          },
-          response(response) {
-            console.log(`Received ${response.status} ${response.url}`); 
-            
-            return response;
-          }
-        });
-    });
-
-    httpClient.fetch('users')
-    .then(response => response.json())
-    .then(data=> {
-      this.router.navigateToRoute('success');
-    })
-    .catch((error) => {
-      this.openDialog('the sending was not successful','Error',false,'error');
-    });
+  this.api.post('MAINCONROLLER/CreateUser',qs.JSON(this.Applicant))
+  .then(Response=>{
+    if(Response.status==201){
     
+      this.router.navigateToRoute('success');
+    }
+    else{
+      this.openDialog('the sending was not successful','Error',false,'error');
+    }
+
+  })
+  .catch(error=>{
+    this.openDialog('the sending was not successful','Error',false,'error');
+  })
   }
- public messege:string='asdsads';
+  test()
+  {
+    alert(qs.JSON(this.Applicant));
+  }
+ 
 }

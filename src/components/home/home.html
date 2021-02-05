@@ -1,11 +1,11 @@
 <template>
 <div class="container" >
   <h2>Form Validation</h2>
-  <p>In this example, we use <code>.was-validated</code> to indicate what's missing before submitting the form:</p>
+  <p>In this example, we use <code>.was-validated</code></p>
   <form  validation-errors.bind="errors">
     <div class="form-group" validation-errors.bind="errorname">
       <label for="uname" t="Name" ></label>
-      <input type="text" class="form-control" class.bind="errorname.length ? 'border border-danger' : ''"  value.bind="Applicant.Name & validate"  t="[placeholder]$t(Enter) $t(Name)" change.delegate="countrycheck()" >
+      <input type="text" class="form-control" class.bind="errorname.length ? 'border border-danger' : ''"  value.bind="Applicant.Name & validate"  t="[placeholder]$t(Enter) $t(Name)"  >
       <span class="help-block" repeat.for="errorInfo of errorname">
         ${errorInfo.error.message}
       </span>
@@ -26,7 +26,7 @@
     </div>
     <div class="form-group" validation-errors.bind="errorcountry">
       <label for="CountryOfOrigin" t="CountryOfOrigin"></label>
-      <input type="text" class="form-control" id="uname" class.bind="errorcountry.length ? 'border border-danger' : ''" value.bind="Applicant.CountryOfOrigin & validate" t="[placeholder]$t(Enter) $t(CountryOfOrigin)" name="uname" >
+      <input type="text" class="form-control" id="uname"   change.delegate="countrycheck()" class.bind="errorcountry.length || !countrystatus ? 'border border-danger' : ''" value.bind="Applicant.CountryOfOrigin & validate" t="[placeholder]$t(Enter) $t(CountryOfOrigin)" name="uname" >
       <span class="help-block" repeat.for="errorInfo of errorcountry">
         ${errorInfo.error.message}
       </span>
@@ -53,14 +53,14 @@
 
     <div class="form-group" validation-errors.bind="errorhired" >
       <label for="Age" t="Hired"></label>
-        <div class="form-check-inline" >
-          <label class="form-check-label" for="radio1" >
-            <input type="radio" class="form-check-input"  checked.bind="Applicant.Hired & validate"  id="radio1" name="Hired" value="option1" ><span t="Yes"></span>
+        <div class="form-check-inline"  >
+          <label class="form-check-label" for="radio1"  >
+            <input type="radio" class="form-check-input"  checked.bind="Applicant.Hired & validate"  id="radio1" name="Hired" value="Yes" ><span t="Yes"></span>
           </label>
         </div>
         <div class="form-check-inline" >
           <label class="form-check-label" for="radio2" >
-            <input type="radio" class="form-check-input" checked.bind="Applicant.Hired & validate"  id="radio2" name="Hired" value="option2"><span t="No"></span>
+            <input type="radio" class="form-check-input" checked.bind="Applicant.Hired & validate"  id="radio2" name="Hired" value="No"><span t="No"></span>
           </label>
         </div>
         <span class="help-block" repeat.for="errorInfo of errorhired">
@@ -69,13 +69,7 @@
     </div>
     <button type="button" class="btn btn-success" t="Send" click.trigger="send()" disabled.bind="!canSend || controller.errors.length>=1">Send</button>
     <button type="button" class="btn btn-info" t="Reset" click.trigger="openDialog('You Really sure to reset all the data?','Reset Data',true,'reset')" disabled.bind="!canSave">Reset</button>
-   
-
-    <ul if.bind="controller.errors">
-      <li repeat.for="error of controller.errors">
-          ${error.message}
-      </li>
-  </ul>
+    <button type="button" class="btn btn-success"  click.trigger="test()">Send</button>
   
   </form>
 </div>

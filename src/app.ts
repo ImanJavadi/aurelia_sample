@@ -10,7 +10,8 @@ export class App {
     config.options.root = '/';
     config.map([
       { route: '', moduleId: PLATFORM.moduleName('./components/home/home'),   title: 'Home' },
-      { route: 'success',  moduleId: PLATFORM.moduleName('./components/success/success'), name:'success' }
+      { route: 'success',  moduleId: PLATFORM.moduleName('./components/success/success'), name:'success' },
+      { route: 'home',  moduleId: PLATFORM.moduleName('./components/home/home'), name:'home' },
     ]);
 
     this.router = router;

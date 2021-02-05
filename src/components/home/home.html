@@ -54,7 +54,7 @@
         
     </div>
     <button type="button" class="btn btn-success" t="Send" click.trigger="send()" disabled.bind="!canSend || controller.errors.length>=1">Send</button>
-    <button type="button" class="btn btn-info" t="Reset" click.trigger="openDialog('You Really sure to reset all the data?','Reset Data',true,'reset')" disabled.bind="!canRest">Reset</button>
+    <button type="button" class="btn btn-info" t="Reset" click.trigger="openDialog('You Really sure to reset all the data?','Reset Data',true,'reset')" disabled.bind="!canReset">Reset</button>
     
   
   </form>

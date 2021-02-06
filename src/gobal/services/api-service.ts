@@ -11,7 +11,7 @@ export class apiservice{
     const headersConfig = {
       'Content-Type': 'pplication/json',
       'Accept': 'application/json',
-      'Access-Control-Allow-Origin': '*',
+      
     };
     return new Headers(headersConfig);
   }
@@ -39,8 +39,7 @@ export class apiservice{
     const options = {
       method: 'POST',
       headers: this.setHeaders(),
-      mode : 'no-cors',
-      body: json(body)
+      body: JSON.stringify(body)
     };
     return this.http.fetch(`${config.api_url}${path}`,options);
   }

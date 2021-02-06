@@ -85,17 +85,22 @@ export class App {
       age: this.Applicant.Age,
       hired: this.Applicant.Hired
     }
-
-   
   this.api.post('CreateUser',body)
-  .then(Response=> Response.json())
-  .then(data=>{
-    alert('')
+  .then(Response=>{
+    if(Response.status==201){
+    
+      this.router.navigateToRoute('success');
+    }
+    else{
+      this.openDialog('the sending was not successful11','Error',false,'error');
+    }
+
   })
   .catch((error)=>{
     alert(error)
     this.openDialog('the sending was not successful','Error',false,'error');
   })
   }
+  
  
 }

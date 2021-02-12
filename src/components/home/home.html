@@ -1,4 +1,5 @@
 <template>
+  <require from="../../style.css"></require>
 <div class="container" >
   <h2>Hahn</h2>
   <p>Hahn Softwareentwicklung <code>.Applicant</code></p>
@@ -55,8 +56,8 @@
     </div>
     <button type="button" class="btn btn-success" t="Send" click.trigger="send()" disabled.bind="!canSend || controller.errors.length>=1">Send</button>
     <button type="button" class="btn btn-info" t="Reset" click.trigger="openDialog('You Really sure to reset all the data?','Reset Data',true,'reset')" disabled.bind="!canReset">Reset</button>
-   
-
+    <button type="button" click.delegate="send()">test</button>
+<p class="iman">ایمان جوادی جوکار</p>
   
   </form>
 

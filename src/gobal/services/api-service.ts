@@ -9,8 +9,9 @@ export class apiservice{
 
   setHeaders() {
     const headersConfig = {
-      'Content-Type': 'pplication/json',
+      'Content-Type': 'application/json; charset=utf-8',
       'Accept': 'application/json',
+      'Access-Control-Allow-Origin': '*'
       
     };
     return new Headers(headersConfig);

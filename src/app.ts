@@ -12,7 +12,7 @@ export class App {
       { route: '', moduleId: PLATFORM.moduleName('./components/home/home'),   title: 'Home' },
       { route: 'success',  moduleId: PLATFORM.moduleName('./components/success/success'), name:'success' },
       { route: 'home',  moduleId: PLATFORM.moduleName('./components/home/home'), name:'home' },
-      { route: 'test',  moduleId: PLATFORM.moduleName('./components/test/test'), name:'home' },
+      { route: 'test',  moduleId: PLATFORM.moduleName('./test'), name:'home' },
     ]);
 
     this.router = router;

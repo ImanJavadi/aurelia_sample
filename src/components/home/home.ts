@@ -75,7 +75,7 @@ export class App {
   }
   send()
   {
-    let body={
+    let body1={
       id: 0,
       name: this.Applicant.Name,
       familyName: this.Applicant.Familyname,
@@ -85,7 +85,18 @@ export class App {
       age: this.Applicant.Age,
       hired: this.Applicant.Hired
     }
-  this.api.post('CreateUser',body)
+    let body2={
+      id: 0,
+      name: 'imannn',
+      familyName: 'javadijavadi',
+      address: 'asdadsasd asd as a sd as',
+      countryOfOrigin: 'usa',
+      emailAddress: 'imanjavadiop@gmail.com',
+      age: 45,
+      hired: true
+    }
+   
+  this.api.post('CreateUser',body2)
   .then(Response=>{
     if(Response.status==201){
     

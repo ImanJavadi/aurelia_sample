@@ -1,6 +1,7 @@
 import {Aurelia} from 'aurelia-framework';
 import * as environment from '../config/environment.json';
 import {PLATFORM} from 'aurelia-pal';
+import * as $ from 'jquery';
 import { Backend, TCustomAttribute } from "aurelia-i18n";
 const resBundle = require('i18next-resource-store-loader!./locales/index');
 import 'bootstrap';
@@ -40,5 +41,8 @@ export function configure(aurelia: Aurelia): void {
         ]
       });
     });
+    let winObj:any = <any>window
+    winObj['jQuery'] = $;
+    winObj['$'] = $;
   aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app')));
 }

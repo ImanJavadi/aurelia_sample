@@ -13,6 +13,7 @@ export class App {
       { route: 'success',  moduleId: PLATFORM.moduleName('./components/success/success'), name:'success' },
       { route: 'home',  moduleId: PLATFORM.moduleName('./components/home/home'), name:'home' },
       { route: 'test',  moduleId: PLATFORM.moduleName('./test'), name:'home' },
+      { route: 'dashboard',  moduleId: PLATFORM.moduleName('./components/dashboard/dashboard'), name:'داشبورد' },
     ]);
 
     this.router = router;

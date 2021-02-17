@@ -1,47 +1,25 @@
 <template>
   <require from="./plugins/font-awesome/css/font-awesome.min.css"></require>
-  <require from="./plugins/datatables/dataTables.bootstrap4.css">
+  <require from="./plugins/datatables/dataTables.bootstrap4.css"></require>
   <require from="./dist/css/adminlte.min.css"></require>
   <require from="./dist/css/bootstrap-rtl.min.css"></require>
   <require from="./dist/css/custom-style.css"></require>
 
 <router-view></router-view>
+
 <script src="./plugins/jquery/jquery.min.js"></script>
+<script src="./plugins/popper/popper.min.js"></script>
+<script src="./plugins/bootstrap/js/bootstrap.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="./plugins/datatables/jquery.dataTables.js"></script>
 <script src="./plugins/datatables/dataTables.bootstrap4.js"></script>
+
+<!-- SlimScroll -->
 <script src="./plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
 <script src="./plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="./dist/js/adminlte.min.js"></script>
 <script src="./dist/js/demo.js"></script>
-<script>
-  $(function () {
-    $("#example1").DataTable({
-        "language": {
-            "paginate": {
-                "next": "بعدی",
-                "previous" : "قبلی"
-            }
-        },
-        "info" : false,
-    });
-    $('#example2').DataTable({
-        "language": {
-            "paginate": {
-                "next": "بعدی",
-                "previous" : "قبلی"
-            }
-        },
-      "info" : false,
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "autoWidth": false
-    });
-  });
-</script>
+
 </template>

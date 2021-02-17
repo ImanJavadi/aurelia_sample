@@ -11,7 +11,6 @@ export class apiservice{
     const headersConfig = {
       'Content-Type': 'application/json; charset=utf-8',
       'Accept': 'application/json',
-      'Access-Control-Allow-Origin': '*'
       
     };
     return new Headers(headersConfig);
@@ -40,10 +39,35 @@ export class apiservice{
     const options = {
       method: 'POST',
       headers: this.setHeaders(),
-      body: JSON.stringify(body)
+      body: json(body)
     };
     return this.http.fetch(`${config.api_url}${path}`,options);
   }
+
+  postnewmoshtarek(path, body = {}) {
+    alert(json(body))
+    const options = {
+      method: 'POST',
+      headers: this.setHeaders(),
+      body: json(body)
+    };
+    return this.http.fetch(`${config.api_url}${path}`,options);
+  }
+
+  upload(path, params, files, method = "POST") {
+    let formData = new FormData();
+
+    for (let i = 0; i < files.length; i++) {
+        formData.append(`files[${i}]`, files[i]);
+    }
+
+    return this.http.fetch(`${config.api_url}${path}?${qs.stringify(params)}`, {
+        method: method,
+        body: formData,
+        headers: new Headers()
+    }).then(response => alert(qs.stringify(params)))
+    .catch(erroe=>alert(erroe))
+}
 
 
 }

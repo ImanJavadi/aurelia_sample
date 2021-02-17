@@ -1,8 +1,14 @@
 import {Router, RouterConfiguration} from 'aurelia-router';
 import {PLATFORM} from 'aurelia-pal';
-
+import {inject, TemplatingEngine} from 'aurelia-framework';
+import 'datatables.net-dt'
+@inject(TemplatingEngine)
 export class App {
   router: Router;
+  constructor(private templatingEngine:TemplatingEngine)
+  {
+    this.templatingEngine = templatingEngine;
+  }
   
   configureRouter(config: RouterConfiguration, router: Router){
     config.title = 'Hahn';

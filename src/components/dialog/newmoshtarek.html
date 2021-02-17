@@ -1,0 +1,15 @@
+<template>
+  
+    <ux-dialog>
+      <ux-dialog-body>
+        <h2>${title}</h2>
+        <p1>${message}</p1>
+      </ux-dialog-body>
+  
+      <ux-dialog-footer>
+        <button click.delegate="ok()">OK</button>
+            <button click.delegate="cancel()" show.bind="cancelebtn">Cancel</button>
+      </ux-dialog-footer>
+    </ux-dialog>
+
+</template>

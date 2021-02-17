@@ -9,8 +9,8 @@ export class dashboard {
     config.options.pushState = true;
     config.options.root = '/';
     config.map([
-      { route: '', moduleId: PLATFORM.moduleName('../pishkhan/pishkhan'),   title: 'پیشخوان' },
-      { route: 'moshtarek',  moduleId: PLATFORM.moduleName('../moshtarek/moshtarek'), name:'امور مشترکین' },
+      { route: 'moshtarek', moduleId: PLATFORM.moduleName('../pishkhan/pishkhan'),   title: 'پیشخوان' },
+      { route: '',  moduleId: PLATFORM.moduleName('../moshtarek/moshtarek'), name:'امور مشترکین' },
     ]);
 
     this.router = router;

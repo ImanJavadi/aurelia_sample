@@ -1,3 +1,227 @@
 <template>
-    moshtarek
+   
+    <require from="../../plugins/formstep/formstep2.css"></require>
+    <section class="content">
+        <div class="row">
+          <div class="col-12">
+          
+            <!-- /.card -->
+  
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>کد اشتراک ساماب</th>
+                    <th>کد بایگانی</th>
+                    <th>نام</th>
+                    <th>نام خانوادگی</th>
+                    <th>کد ملی</th>
+                    <th>نام کانال</th>
+                    <th>عملیات</th>
+                    
+                    
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>1325874</td>
+                    <td>10025
+                    </td>
+                    <td>رضا</td>
+                    <td>صفری کیا</td>
+                    <td>1920542156</td>
+                    <td>ال 5</td>
+                    <td style="">
+                      <button type="button" class="btn btn-success" >نمایش </button>
+                      <button type="button" class="btn btn-warning">ویرایش </button>
+                      <button type="button"  class="btn btn-danger">حذف </button>
+                      
+                    </td>
+                  </tr>
+                  
+                  
+                  </tbody>
+                  <tfoot>
+
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-sm-12">
+                    <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                        <h2 id="heading">افزودن مشترک جدید</h2>
+                        <p>لطفا تمامی مراحل را با دقت انجام دهید</p>
+                        <form id="msform">
+                            <!-- progressbar -->
+                            <ul id="progressbar">
+                                <li class="active" id="account"><strong>اکانت</strong></li>
+                                <li id="personal"><strong>فردی</strong></li>
+                                <li id="payment"><strong>مدارک</strong></li>
+                                <li id="confirm"><strong>پایان</strong></li>
+                            </ul>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0"  aria-valuemax="100" style="width:50%"></div>
+                            </div> <br> <!-- fieldsets -->
+                            <fieldset>
+                                <div class="form-card" validation-errors.bind="errors">
+                                    <div class="row">
+                                        
+                                        
+                                        <div class="col-7">
+                                          <h2 class="fs-title">اطلاعات کاربری:</h2>
+                                      </div>
+                                      <div class="col-5">
+                                        <h2 class="steps">مرحله 1 از 4</h2>
+                                    </div>
+                                    </div>
+                                    <div class="form-group" validation-errors.bind="errorsamab">
+                                      <label for="exampleInputEmail1">کداشتراک ساماب</label>
+                                      <input type="" class="form-control" class.bind="errorsamab.length ? 'border border-danger' : ''"  value.bind="moshtarekin.samabid & validate" placeholder="کد اشتراک ساماب را وارد کنید">
+                                    </div>
+                                    <div class="form-group" validation-errors.bind="errorpass">
+                                      <label for="exampleInputPassword1">رمز عبور</label>
+                                      <input type="text" class="form-control" class.bind="errorpass.length ? 'border border-danger' : ''"  value.bind="moshtarekin.password & validate" placeholder="رمز عبور را وارد کنید">
+                                    </div>
+                                    <div class="form-group" validation-errors.bind="errorrpass">
+                                      <label for="exampleInputPassword1">تکرار رمز عبور</label>
+                                      <input type="password" class="form-control" class.bind="errorrpass.length || moshtarekin.password!=moshtarekin.rpassword ? 'border border-danger' : ''"  value.bind="moshtarekin.rpassword & validate" placeholder="رمز عبور را وارد کنید">
+                                    </div>
+                                   
+                                    
+                                </div> <input type="button" name="next" class="next action-button" click.delegate="test()"  style.bind="!canNext1 || errors.length>=1 ? 'opacity:.65' : ''" disabled.bind="!canNext1 || errors.length>=1 || moshtarekin.password!=moshtarekin.rpassword" value="مرحله بعد" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card" validation-errors.bind="errorsnext2">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <h2 class="fs-title">اطلاعات فردی:</h2>
+                                        </div>
+                                        <div class="col-5">
+                                            <h2 class="steps">مرحله 2 از 4</h2>
+                                        </div>
+                                    </div> 
+                                    <div class="form-group" validation-errors.bind="errorname">
+                                      <label for="test" >نام</label>
+                                      <input type="text" class="form-control" class.bind="errorname.length ? 'border border-danger' : ''" value.bind="moshtarekin.firstName & validate" placeholder="نام را وارد کنید">
+                                    </div>
+                                    <div class="form-group" validation-errors.bind="errorlastname">
+                                      <label for="exampleInputPassword1" >نام خانوادگی</label>
+                                      <input type="text" class="form-control" class.bind="errorlastname.length ? 'border border-danger' : ''" value.bind="moshtarekin.lastName & validate" placeholder="نام خانوادگی را وارد کنید">
+                                    </div>
+                                    <div class="form-group" validation-errors.bind="errorpedar">
+                                      <label for="exampleInputPassword1" >نام پدر</label>
+                                      <input type="text" class="form-control" class.bind="errorpedar.length ? 'border border-danger' : ''" value.bind="moshtarekin.fatherName & validate" placeholder="نام پدر را وارد کنید">
+                                    </div>
+                                    <div class="form-group" validation-errors.bind="errormeli">
+                                      <label for="exampleInputPassword1" >کد ملی</label>
+                                      <input type="text" class="form-control" class.bind="errormeli.length ? 'border border-danger' : ''" value.bind="moshtarekin.nationalCode & validate" placeholder="کد ملی را وارد کنید">
+                                    </div>
+                                    <div class="form-group" validation-errors.bind="errorshenasnameh">
+                                      <label for="exampleInputPassword1" >شماره شناسنامه</label>
+                                      <input type="text" class="form-control" class.bind="errorshenasnameh.length ? 'border border-danger' : ''" value.bind="moshtarekin.shshenasnameh & validate" placeholder="شماره شناسنامه را وارد کنید">
+                                    </div>
+                                    <div class="form-group" validation-errors.bind="errortavalod">
+                                      <label for="exampleInputPassword1" >تاریخ تولد</label>
+                                      <input type="text" class="form-control" class.bind="errortavalod.length ? 'border border-danger' : ''" value.bind="moshtarekin.tarikhtavalod & validate" placeholder="تاریخ تولد را وارد کنید">
+                                    </div>
+                                    <div class="form-group" validation-errors.bind="erroraddress">
+                                      <label for="exampleInputPassword1" >آدرس</label>
+                                      <input type="text" class="form-control" class.bind="erroraddress.length ? 'border border-danger' : ''" value.bind="moshtarekin.address & validate" placeholder="آدرس را وارد کنید">
+                                    </div>
+                                    <div class="form-group" validation-errors.bind="errorpost">
+                                      <label for="exampleInputPassword1" >کد پستی</label>
+                                      <input type="text" class="form-control" class.bind="errorpost.length ? 'border border-danger' : ''" value.bind="moshtarekin.postalCode & validate" placeholder="کد پستی را وارد کنید">
+                                    </div>
+                                    <div class="form-group" validation-errors.bind="errormobile">
+                                      <label for="exampleInputPassword1" >تلفن همراه</label>
+                                      <input type="text" class="form-control" class.bind="errormobile.length ? 'border border-danger' : ''" value.bind="moshtarekin.mobilePhoneNumber & validate" placeholder="تلفن همراه را وارد کنید">
+                                    </div>
+                                    <div class="form-group" validation-errors.bind="errorhome">
+                                      <label for="exampleInputPassword1" >تلفن منزل</label>
+                                      <input type="text" class="form-control" class.bind="errorhome.length ? 'border border-danger' : ''" value.bind="moshtarekin.homePhone & validate" placeholder="تلفن منزل را وارد کنید">
+                                    </div>
+                                    <div class="form-group" validation-errors.bind="erroremail">
+                                      <label for="exampleInputPassword1" >ایمیل</label>
+                                      <input type="text" class="form-control" class.bind="erroremail.length ? 'border border-danger' : ''" value.bind="moshtarekin.email & validate" placeholder="ایمیل را وارد کنید">
+                                    </div>
+                                </div> <input type="button" name="next"  class="next action-button" style.bind="!canNext2 || errorsnext2.length>=1 ? 'opacity:.65' : ''" disabled.bind="!canNext2 || errorsnext2.length>=1" value="مرحله بعدی" /> <input type="button" name="previous" class="previous action-button-previous" value="مرحله قبلی" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <h2 class="fs-title">ارسال مدارک:</h2>
+                                        </div>
+                                        <div class="col-5">
+                                            <h2 class="steps">مرحله 3 - 4</h2>
+                                        </div>
+                                    </div> <label class="fieldlabels">عکس مشترک:</label> <input type="file" name="pic" accept="image/*"> <label class="fieldlabels">عکس شناسنامه:</label> <input type="file" name="pic" accept="image/*">
+                                    <label class="fieldlabels">عکس کارت ملی(رو):</label> <input type="file" name="pic" accept="image/*"><label class="fieldlabels">عکس کارت ملی(پشت):</label> <input type="file" name="pic" accept="image/*">
+                                </div> <input type="button" name="next" class="next action-button" click.delegate="submitnewmostarek()" value="ثبت اطلاعات" /> <input type="button" name="previous" class="previous action-button-previous" value="مرحله قبل" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h2 class="fs-title">پایان:</h2>
+                                        </div>
+                                        <div class="col-5">
+                                            <h2 class="steps">مرحله 4 - 4</h2>
+                                        </div>
+                                    </div> <br><br>
+                                    <h2 class="purple-text text-center"><strong>${submitstatustitle}</strong></h2> <br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-3"> 
+                                          <img show.bind="submitstatus" src="../../plugins/formstep/GwStPmg.png" class="fit-image">
+                                          <img show.bind="!submitstatus" src="../../plugins/formstep/sign-stop-11530957297a55k5magvw.png" class="fit-image">  
+                                        </div>
+                                    </div> <br><br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-7 text-center">
+                                            <h5 class="purple-text text-center">${submitstatusdes}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+<form submit.delegate="doUpload()">
+  <input id="files" type="file" accept=".jpg" files.bind="selectedFiles" class="form-control">
+ 
+  <input type="submit" class="btn btn-primary" value="Upload" if.bind="selectedFiles.length > 0" />
+</form>
+
+
+  <script src="../../plugins/formstep/formstep2.js"></script>
 </template>

@@ -15,6 +15,7 @@
     "aurelia-i18n": "^3.1.0",
     "aurelia-validation": "^2.0.0-rc2",
     "bootstrap": "^4.6.0",
+    "datatables.net-dt": "^1.10.23",
     "font-awesome": "^4.7.0",
     "i18next-resource-store-loader": "^0.1.2",
     "jquery": "^3.5.1",

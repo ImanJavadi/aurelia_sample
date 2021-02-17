@@ -54,20 +54,24 @@ export class apiservice{
     return this.http.fetch(`${config.api_url}${path}`,options);
   }
 
-  upload(path, params, files, method = "POST") {
+  upload(path, params, file1,file2,file3) {
     let formData = new FormData();
 
-    for (let i = 0; i < files.length; i++) {
-        formData.append(`files[${i}]`, files[i]);
+    for (let i = 0; i < file1.length; i++) {
+        formData.append(`files[${i}]`, file1[i]);
     }
-
-    return this.http.fetch(`${config.api_url}${path}?${qs.stringify(params)}`, {
-        method: method,
-        body: formData,
-        headers: new Headers()
-    }).then(response => alert(qs.stringify(params)))
-    .catch(erroe=>alert(erroe))
-}
-
+    for (let i = 0; i < file2.length; i++) {
+      formData.append(`files[${i}]`, file2[i]);
+    }
+    for (let i = 0; i < file3.length; i++) {
+      formData.append(`files[${i}]`, file3[i]);
+    }
+    const options = {
+      method: 'POST',
+      body: formData,
+      headers: new Headers()
+    };
+    return this.http.fetch(`${config.api_url}${path}?${qs.stringify(params)}`,options);
+  }
 
 }

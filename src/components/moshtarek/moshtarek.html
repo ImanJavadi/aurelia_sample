@@ -217,10 +217,12 @@
   </div>
 </div>
 <form submit.delegate="doUpload()">
-  <input id="files" type="file" accept=".jpg" files.bind="selectedFiles" class="form-control">
- 
-  <input type="submit" class="btn btn-primary" value="Upload" if.bind="selectedFiles.length > 0" />
+  <input id="file1" type="file" multiple accept="image/*"  files.bind="selectedcartemeli" class="form-control">
+  <input id="file2" type="file"  files.bind="selectedbackcartemeli" class="form-control">
+  <input id="file3" type="file"  files.bind="selectedshenasnameh" class="form-control">
+  <input type="submit" class="btn btn-primary" value="Upload" if.bind="selectedcartemeli.length > 0" />
 </form>
+<input type="submit" class="btn btn-primary" click.delegate="test1()" />
 
 
   <script src="../../plugins/formstep/formstep2.js"></script>

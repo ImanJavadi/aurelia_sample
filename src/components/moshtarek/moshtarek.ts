@@ -1,3 +1,4 @@
+import { test } from './../../test';
 import { apiservice } from 'gobal/services/api-service';
 import { moshtarekin } from './../../gobal/model/moshtarekin';
 import { newmoshtarek } from '../../components/dialog/newmoshtarek';
@@ -13,7 +14,9 @@ export class moshtarek{
     submitstatustitle:string="در حال پردازش...";
     submitstatusdes:string;
     submitstatus:boolean=false;
-    selectedFiles:string[];
+    selectedcartemeli=[];
+    selectedbackcartemeli=[];
+    selectedshenasnameh=[];
     constructor(private dialogservice:DialogService,private controllerFactory: ValidationControllerFactory,private moshtarekin:moshtarekin,private api:apiservice){
       this.controller = controllerFactory.createForCurrentScope();
     }
@@ -127,14 +130,29 @@ export class moshtarek{
   }
   doUpload()
   {
+    
     let params={
       id:1,
-      cartemeli:"abdolahi2.jpg",
-      //shenasnameh:"2-1.jpg"
+      cartemeli:this.selectedcartemeli[0].name,
+      backcartemeli:this.selectedbackcartemeli[0].name,
+      shenasnameh:this.selectedshenasnameh[0].name
 
     }
-    return this.api.upload('Upload', params, this.selectedFiles[0]).then(() => alert('ok'));
-  }
+    return this.api.upload('Upload', params, this.selectedcartemeli,this.selectedbackcartemeli,this.selectedshenasnameh)
+    .then(response=>{
+      if(response.status==200)
+      {
+        alert('ok')
 
+      }
+    })
+    .catch(error=>{
+      alert('notok');
+    })
+  }
+test1()
+{
+  alert(this.selectedcartemeli[0].name)
+}
 
 }

@@ -144,7 +144,7 @@ html {
 #progressbar li {
     list-style-type: none;
     font-size: 15px;
-    width: 25%;
+    width: 20%;
     float: right;
     position: relative;
     font-weight: 400

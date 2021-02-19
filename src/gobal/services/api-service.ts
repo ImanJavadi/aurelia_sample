@@ -2,6 +2,7 @@ import {HttpClient, json} from 'aurelia-fetch-client';
 import {inject} from 'aurelia-dependency-injection';
 import { config } from './config';
 import * as qs from 'querystringify';
+import { arch } from 'os';
 
 export class apiservice{
 
@@ -9,7 +10,7 @@ export class apiservice{
 
   setHeaders() {
     const headersConfig = {
-      'Content-Type': 'application/json; charset=utf-8',
+      'Content-Type': 'application/json;',
       'Accept': 'application/json',
       
     };
@@ -72,6 +73,20 @@ export class apiservice{
       headers: new Headers()
     };
     return this.http.fetch(`${config.api_url}${path}?${qs.stringify(params)}`,options);
+  }
+  getarchive(patch:string){
+    const options = {
+      method: 'GET',
+      headers: this.setHeaders()
+    };
+    return this.http.fetch(`${config.api_url}${patch}`,options);
+  }
+  gettabagheh(patch:string,archive:number){
+    const options = {
+      method: 'GET',
+      headers: this.setHeaders()
+    };
+    return this.http.fetch(`${config.api_url}${patch}/${archive}`,options);
   }
 
 }
